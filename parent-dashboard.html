@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Parent Dashboard</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body id="parent-dashboard">
+  <div class="topbar">
+    <div class="inner">
+      <div class="brand">CampusConnect <span>Portal</span></div>
+      <div class="nav">
+        <a href="./teacher-dashboard.html">Teacher View</a>
+        <a href="./parent-login.html">Logout</a>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="card">
+      <div class="header-row">
+        <div class="header-left">
+          <div class="avatar" id="child-avatar" aria-hidden="true">S</div>
+          <div>
+            <h1 id="child-name">Your Child</h1>
+            <div class="header-meta"><span id="child-class">Class</span> • ID: <span id="child-id">—</span></div>
+          </div>
+        </div>
+        <div class="pill">Parent Portal</div>
+      </div>
+    </div>
+
+    <div class="stats mt-16">
+      <div class="card stat-card">
+        <div class="stat-top">
+          <div class="stat-label">Attendance</div>
+          <div class="stat-icon">A</div>
+        </div>
+        <div class="stat-value" id="stat-attendance">—%</div>
+        <div class="hint">Present rate</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-top">
+          <div class="stat-label">Average Marks</div>
+          <div class="stat-icon">M</div>
+        </div>
+        <div class="stat-value" id="stat-average">—</div>
+        <svg id="marks-sparkline" class="sparkline" viewBox="0 0 100 30" preserveAspectRatio="none"></svg>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-top">
+          <div class="stat-label">Announcements</div>
+          <div class="stat-icon">N</div>
+        </div>
+        <div class="stat-value" id="stat-annc-count">—</div>
+        <div class="hint">This month</div>
+      </div>
+    </div>
+
+    <div class="grid grid-2 mt-16">
+      <div class="grid">
+        <div class="card">
+          <div class="section-header">
+            <h2>Attendance</h2>
+            <div class="controls">
+              <span class="hint">Latest records</span>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="attendance-tbody">
+                <tr><td colspan="2" class="hint">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-header">
+            <h2>Marks</h2>
+            <div class="controls">
+              <select id="marks-filter" class="small">
+                <option value="">All subjects</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Marks</th>
+                </tr>
+              </thead>
+              <tbody id="marks-tbody">
+                <tr><td colspan="2" class="hint">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="section-header">
+            <h2>Achievements & Streak</h2>
+            <div class="controls"><span class="hint">Last 10 days</span></div>
+          </div>
+          <div class="streak" id="att-streak"></div>
+          <div class="achievements mt-16" id="achievements">
+            <span class="chip success" id="achv-good-att">Good Attendance</span>
+            <span class="chip warn" id="achv-improve-marks">Improve in Science</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-header">
+            <h2>Upcoming Exams</h2>
+          </div>
+          <div class="list" id="upcoming-exams">
+            <div class="item"><div class="icon">📅</div><div><div><strong>No upcoming exams</strong></div><div class="meta">Exams will appear here when announced</div></div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-header">
+            <h2>Contact Teacher</h2>
+          </div>
+          <form id="contact-teacher-form">
+            <div>
+              <label for="ct-subject">Subject</label>
+              <input id="ct-subject" placeholder="Query about recent marks" required />
+            </div>
+            <div>
+              <label for="ct-message">Message</label>
+              <textarea id="ct-message" placeholder="Write your message..." required></textarea>
+            </div>
+            <div class="actions">
+              <button type="submit">Send</button>
+              <span id="ct-msg" class="hint"></span>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="section-header">
+            <h2>Notification Preferences</h2>
+          </div>
+          <div class="list">
+            <div class="item">
+              <div class="icon">🔔</div>
+              <div style="flex:1;">
+                <div><strong>Announcements</strong></div>
+                <div class="meta">Receive alerts for new announcements</div>
+              </div>
+              <label class="switch"><input type="checkbox" id="notif-annc" checked /><span class="slider"></span></label>
+            </div>
+            <div class="item">
+              <div class="icon">✅</div>
+              <div style="flex:1;">
+                <div><strong>Attendance</strong></div>
+                <div class="meta">Daily summary of attendance status</div>
+              </div>
+              <label class="switch"><input type="checkbox" id="notif-att" checked /><span class="slider"></span></label>
+            </div>
+            <div class="item">
+              <div class="icon">🧪</div>
+              <div style="flex:1;">
+                <div><strong>Marks</strong></div>
+                <div class="meta">Result notifications for new marks</div>
+              </div>
+              <label class="switch"><input type="checkbox" id="notif-marks" checked /><span class="slider"></span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mt-16">
+      <div class="section-header">
+        <h2>Announcements</h2>
+        <div class="controls">
+          <button id="refresh-announcements" class="secondary">Refresh</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Title</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+          <tbody id="parent-announcements-tbody">
+            <tr><td colspan="3" class="hint">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="./script.js"></script>
+</body>
+</html>

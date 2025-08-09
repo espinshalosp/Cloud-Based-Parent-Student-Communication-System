@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CampusConnect | Choose Login</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body id="login-select">
+  <div class="topbar">
+    <div class="inner">
+      <div class="brand">CampusConnect <span>Portal</span></div>
+      <div class="nav"><a href="./login.html">Home</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card wide hero">
+      <div class="decor">
+        <div class="blob one"></div>
+        <div class="blob two"></div>
+      </div>
+      <div class="eyebrow"><span class="pill">Stay connected in real time</span></div>
+      <h1><span class="gradient-text">Institution–Parent Communication</span> made effortless</h1>
+      <div class="subheader">Track attendance, marks, and announcements in a secure, easy-to-use portal for teachers and parents.</div>
+      <div class="feature-list mt-16">
+        <div class="item"><span class="check">✓</span><span>Instant announcements & reminders</span></div>
+        <div class="item"><span class="check">✓</span><span>Quick attendance & marks entry</span></div>
+        <div class="item"><span class="check">✓</span><span>Responsive design for all devices</span></div>
+        <div class="item"><span class="check">✓</span><span>Secure role-based access</span></div>
+      </div>
+      <div class="mt-24">
+        <a href="#roles" class="pill" style="text-decoration:none;">Choose your role ↓</a>
+      </div>
+    </div>
+
+    <div id="roles" class="card wide">
+      <div class="header">
+        <div>
+          <h2>Sign in to continue</h2>
+          <div class="subheader">Select your role to access the relevant dashboard.</div>
+        </div>
+      </div>
+
+      <div class="role-grid">
+        <a class="card role-card" href="./teacher-login.html" aria-label="Continue to Teacher Login">
+          <div class="role-icon" aria-hidden="true">T</div>
+          <div>
+            <h2>Teacher Login</h2>
+            <p class="hint">Add attendance, marks, and announcements in seconds.</p>
+          </div>
+          <div class="role-meta mt-8">
+            <span class="pill">Fast entry</span>
+            <span class="pill">Smart defaults</span>
+            <span class="pill">Bulk ready</span>
+          </div>
+          <div class="actions mt-16"><button>Continue as Teacher</button></div>
+        </a>
+
+        <a class="card role-card" href="./parent-login.html" aria-label="Continue to Parent Login">
+          <div class="role-icon" aria-hidden="true">P</div>
+          <div>
+            <h2>Parent Login</h2>
+            <p class="hint">View your child’s attendance, marks, and announcements.</p>
+          </div>
+          <div class="role-meta mt-8">
+            <span class="pill">Real-time</span>
+            <span class="pill">Secure</span>
+            <span class="pill">Mobile-friendly</span>
+          </div>
+          <div class="actions mt-16"><button>Continue as Parent</button></div>
+        </a>
+      </div>
+
+      <footer class="small">Demo only: Frontend works without a server using sample data. Use the separate login pages to proceed.</footer>
+    </div>
+  </div>
+  <script src="./script.js"></script>
+</body>
+</html>

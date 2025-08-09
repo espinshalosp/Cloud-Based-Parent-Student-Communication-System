@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teacher Dashboard</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body id="teacher-dashboard">
+  <div class="topbar">
+    <div class="inner">
+      <div class="brand">CampusConnect <span>Portal</span></div>
+      <div class="nav">
+        <a href="./parent-dashboard.html">Parent View</a>
+        <a href="./teacher-login.html">Logout</a>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="card">
+      <div class="header-row">
+        <div class="header-left">
+          <div class="avatar" aria-hidden="true">T</div>
+          <div>
+            <h1>Teacher Workspace</h1>
+            <div class="header-meta">Manage attendance, marks, and announcements</div>
+          </div>
+        </div>
+        <div class="pill">Teacher Portal</div>
+      </div>
+    </div>
+
+    <div class="stats mt-16">
+      <div class="card stat-card">
+        <div class="stat-top">
+          <div class="stat-label">Today Marked</div>
+          <div class="stat-icon">A</div>
+        </div>
+        <div class="stat-value" id="stat-today-marked">—</div>
+        <div class="hint">Attendance entries today</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-top">
+          <div class="stat-label">Class Average</div>
+          <div class="stat-icon">M</div>
+        </div>
+        <div class="stat-value" id="stat-class-average">—</div>
+        <div class="hint">Across all subjects</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-top">
+          <div class="stat-label">Announcements</div>
+          <div class="stat-icon">N</div>
+        </div>
+        <div class="stat-value" id="stat-annc-count-teacher">—</div>
+        <div class="hint">This month</div>
+      </div>
+    </div>
+
+    <div class="grid grid-3 mt-16">
+      <div class="card">
+        <h2>Add Individual Attendance</h2>
+        <p class="hint">Record attendance for a single student.</p>
+        <div id="attendance-msg"></div>
+        <form id="attendance-form">
+          <div>
+            <label for="att-date">Date</label>
+            <input type="date" id="att-date" name="date" required />
+          </div>
+          <div>
+            <label for="att-student">Student ID</label>
+            <input type="number" id="att-student" name="student_id" min="1" required />
+          </div>
+          <div>
+            <label for="att-status">Status</label>
+            <select id="att-status" name="status" required>
+              <option value="present">Present</option>
+              <option value="absent">Absent</option>
+            </select>
+          </div>
+          <div class="actions">
+            <button type="submit">Save Attendance</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Quick Attendance</h2>
+        <p class="hint">Mark multiple students at once, then submit.</p>
+        <div class="roster-controls mb-8">
+          <label for="roster-date">Date</label>
+          <input type="date" id="roster-date" />
+          <button id="mark-all-present" class="ghost">Mark All Present</button>
+          <button id="mark-all-absent" class="ghost">Mark All Absent</button>
+          <button id="roster-submit">Save</button>
+        </div>
+        <div class="table-wrap">
+          <table class="roster-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="roster-tbody">
+              <tr><td colspan="3" class="hint">Loading roster…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Post Announcement</h2>
+        <p class="hint">Use a template or write your own.</p>
+        <div class="chips mb-8">
+          <button class="chip" data-template="Exam on [date] for [subject]. Prepare well!">Exam reminder</button>
+          <button class="chip" data-template="PTA meeting on [date] at [time]. Kindly attend.">PTA meeting</button>
+          <button class="chip" data-template="Holiday on [date]. School will remain closed.">Holiday</button>
+        </div>
+        <div id="annc-msg"></div>
+        <form id="announcement-form">
+          <div>
+            <label for="annc-title">Title</label>
+            <input type="text" id="annc-title" name="title" placeholder="PTA Meeting" required />
+          </div>
+          <div>
+            <label for="annc-message">Message</label>
+            <textarea id="annc-message" name="message" placeholder="Details about the meeting..." required></textarea>
+          </div>
+          <div class="actions">
+            <button type="submit">Publish</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="mt-32 grid grid-2">
+      <div class="card">
+        <div class="section-header">
+          <h2>Students Needing Attention</h2>
+          <button id="export-marks" class="secondary">Export CSV</button>
+        </div>
+        <div class="list" id="needs-attention">
+          <div class="item"><div class="icon">!</div><div><div><strong>No data yet</strong></div><div class="meta">Shows students with average < 50 or attendance < 75%</div></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-header">
+          <h2>Recent Activity</h2>
+          <span class="hint">Auto-updates as you save</span>
+        </div>
+        <div class="list" id="recent-activity">
+          <div class="item"><div class="icon">📝</div><div><div><strong>Nothing yet</strong></div><div class="meta">Add marks, attendance, or announcements to see activity.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mt-16">
+      <div class="section-header">
+        <h2>Recent Announcements</h2>
+        <button id="refresh-announcements" class="secondary">Refresh</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Title</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+          <tbody id="announcements-tbody">
+            <tr><td colspan="3" class="hint">No announcements yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="./script.js"></script>
+</body>
+</html>
